@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <title>{{ config.SITE_NAME }}</title>
+{{ bootstrap.load_css() }}
+
+    <!-- Custom styles for this template -->
+      
+      <link href="/static/style.css" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/1556e23c81.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Livvic:300,300i,400,400i,600,600i,700,700i,900&display=swap" rel="stylesheet">
+
+      
+      <style>
+          body {
+              font-family: 'Livvic', sans-serif;
+          }
+          
+          h1 {font-weight: 900
+          }
+          
+          div.hot {
+              background-color: "pink";
+          }
+          
+          div.freezing {
+          background-color: "blue";
+          }
+          
+          
+      </style>
+  </head>
+
+  <body class="d-flex flex-column h-100">
+
+      
+      
+      <header>
+  <!-- Fixed navbar -->
+  
+      
+      <main role="main" class="flex-shrink-0">
+  <div class="container">
+      
+      <h1 class="mt-2"><i class="fas fa-cloud-sun-rain"></i> {{ config.SITE_NAME }} for {{ month_name }} {{ year }}</h1>  
+      
+      <!-- <dl>
+          <dt>Mean maximum temperature</dt>
+          <dd>{{ mean_max_temp }}</dd>
+          <dt>Mean minimum temperature</dt>
+          <dd>{{ mean_min_temp }}</dd>
+      </dl> -->
+
+<!-- first week --> 
+      <div class="row mt-3">
+{% for w in weather_chart[:7] %}
+    <div class="col {% if w["hot"] == True %}hot{% endif %} {% if w["freezing"] == True %}freezing{% endif %}">
+    <h5>{{ w["day_name"] }}</h5>
+        <hr>
+    <h4>{{ w["day"] }}</h4>
+        <ul class="list-unstyled">
+        <li><i class="fas fa-arrow-alt-circle-up"></i> {{ w["max_temp"] }}&#8451;</li>
+        <li><i class="fas fa-arrow-alt-circle-down"></i> {{ w["min_temp"] }}&#8451;</li>
+    </ul> 
+    <p>
+        {% if w["summary"] != None %}
+        {{ w["summary"] }}</p>
+        {% endif %}
+          </div>
+{% endfor %}
+      </div>
+      
+<!-- second week -->   
+            <div class="row">
+
+{% for w in weather_chart[7:14] %}
+                          <div class="col {% if w["hot"] == True %}hot{% endif %} {% if w["freezing"] == True %}freezing{% endif %}">
+        <hr>
+
+    <h4>{{ w["day"] }}</h4>
+                                  <ul class="list-unstyled">
+        <li><i class="fas fa-arrow-alt-circle-up"></i> {{ w["max_temp"] }}&#8451;</li>
+        <li><i class="fas fa-arrow-alt-circle-down"></i> {{ w["min_temp"] }}&#8451;</li>
+    </ul> 
+    <p>
+                                      {% if w["summary"] != None %}
+        {{ w["summary"] }}</p>
+        {% endif %}
+
+                              </p>
+
+                   </div>
+
+{% endfor %}
+      </div>
+
+      <!-- third week -->      
+                      <div class="row">
+
+{% for w in weather_chart[14:21] %}
+                                    <div class="col {% if w["hot"] == True %}hot{% endif %} {% if w["freezing"] == True %}freezing{% endif %}">
+        <hr>
+
+    <h4>{{ w["day"] }}</h4>
+      <ul class="list-unstyled">
+        <li><i class="fas fa-arrow-alt-circle-up"></i> {{ w["max_temp"] }}&#8451;</li>
+        <li><i class="fas fa-arrow-alt-circle-down"></i> {{ w["min_temp"] }}&#8451;</li>
+    </ul>
+    <p>
+                                                {% if w["summary"] != None %}
+        {{ w["summary"] }}</p>
+        {% endif %}
+
+                                        </p>
+                          
+    
+                     </div>
+
+{% endfor %}
+            </div>
+
+<!-- fourth week -->      
+                                <div class="row">
+
+{% for w in weather_chart[21:28] %}
+                                              <div class="col {% if w["hot"] == True %}hot{% endif %} {% if w["freezing"] == True %}freezing{% endif %}">
+        <hr>
+
+    <h4>{{ w["day"] }}</h4>
+                                                  <ul class="list-unstyled">
+        <li><i class="fas fa-arrow-alt-circle-up"></i> {{ w["max_temp"] }}&#8451;</li>
+        <li><i class="fas fa-arrow-alt-circle-down"></i> {{ w["min_temp"] }}&#8451;</li>
+    </ul> 
+    <p>
+                                                          {% if w["summary"] != None %}
+        {{ w["summary"] }}</p>
+        {% endif %}
+
+                                                  </p>
+    
+            </div>
+
+{% endfor %}
+            </div>
+
+<!-- last week -->   
+                                          <div class="row">
+
+{% for w in weather_chart[28:] %}
+    <div class="col {% if w["hot"] == True %}hot{% endif %} {% if w["freezing"] == True %}freezing{% endif %}">
+                <hr>
+
+    <h4> {{ w["day"] }}</h4>
+        <ul class="list-unstyled">
+        <li><i class="fas fa-arrow-alt-circle-up"></i> {{ w["max_temp"] }}&#8451;</li>
+        <li><i class="fas fa-arrow-alt-circle-down"></i> {{ w["min_temp"] }}&#8451;</li>
+    </ul> 
+    <p>
+                {% if w["summary"] != None %}
+        {{ w["summary"] }}</p>
+        {% endif %}
+
+        </p>
+    
+      </div>
+
+{% endfor %}
+<!-- filler days -->
+{% for d in range(filler_days) %}
+<div class="col">
+    &nbsp;
+</div>
+{% endfor %}                                              
+
+      </div>
+
+
+               
+      
+  </div>
+</main>
+      
+      
+      {{ bootstrap.load_js() }}
+      
+  </body>
+</html>
