@@ -4,21 +4,18 @@ from flask_bootstrap import Bootstrap
 from datetime import datetime, timedelta, date
 import calendar
 import pprint
-import feedparser
-import dns
-from pymongo import MongoClient
-
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.py')
 pp = pprint.PrettyPrinter(indent=4)
 
-client = MongoClient(app.config["MONGO_URI"])
-db = client.news
-
 bootstrap = Bootstrap(app) 
 
-@app.route("/weather/<monthyear>")
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/<monthyear>")
 def weather(monthyear):
     month = monthyear[:2]
     month_name = calendar.month_name[int(month)]
@@ -71,7 +68,7 @@ def weather(monthyear):
         # mean_max_temp = total_max_temp / days_in_month
         # total_min_temp = total_min_temp + min_temp
         # mean_max_temp = total_min_temp / days_in_month
-    return render_template("index.html", year=year, weather_chart=weather_chart, month_name=month_name, filler_days=filler_days)
+    return render_template("weather.html", year=year, weather_chart=weather_chart, month_name=month_name, filler_days=filler_days)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port="4565")
