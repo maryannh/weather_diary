@@ -62,12 +62,7 @@ def weather(monthyear):
                 "hot": hot,
                 "freezing": freezing,
             }
-        db.weather.insert_one(info)
         weather_chart.append(info)
-        # total_max_temp = total_max_temp + max_temp
-        # mean_max_temp = total_max_temp / days_in_month
-        # total_min_temp = total_min_temp + min_temp
-        # mean_max_temp = total_min_temp / days_in_month
     return render_template("weather.html", year=year, weather_chart=weather_chart, month_name=month_name, filler_days=filler_days)
 
 if __name__ == '__main__':
