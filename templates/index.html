@@ -15,7 +15,8 @@
       <script src="https://kit.fontawesome.com/1556e23c81.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Livvic:300,300i,400,400i,600,600i,700,700i,900&display=swap" rel="stylesheet">
 
-      
+      {% from 'bootstrap/form.html' import render_form %}
+
       <style>
           body {
               font-family: 'Livvic', sans-serif;
@@ -50,6 +51,7 @@
       <h1 class="mt-2"><i class="fas fa-cloud-sun-rain"></i> {{ config.SITE_NAME }}</h1>  
                                              
 
+{{ render_form(form) }}
 
 
                
